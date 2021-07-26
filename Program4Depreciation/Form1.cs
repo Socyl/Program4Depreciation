@@ -32,30 +32,42 @@ namespace Program4Depreciation
                 //newItem is a double declining depreciating item
                 newItem = new DepreciationDoubleDeclining();   
             }
-            try 
+            try
             {
                 //add the final fields/properties
+                newItem.DateAddedToInventory = dateInDateTimePicker.Value;
                 newItem.LifeTime = Convert.ToInt32(lifetimeTextBox.Text);
                 newItem.Title = titleTextBox.Text;
                 newItem.StartValue = Convert.ToDecimal(startValueTextBox.Text);
                 newItem.EndValue = Convert.ToDecimal(endValueTextBox.Text);
-                newItem.DateAddedToInventory = dateInDateTimePicker.Value;
                 
+
                 //add the item to the listbox
                 inventoryListBox.Items.Add(newItem);
 
                 //clean up the user entry textboxes
                 CleanUp();
-                
             }
-            catch(FormatException exp)
+            catch (FormatException exp)
             {
                 //set error and make textbox visible.
-                errorTextBox.Text = "Error: You must enter valid numbers in the form. "+
-                                    "Starting Value and End Value are decimals representing the value of the item in dollars "+
+                errorTextBox.Text = "Error: You must enter valid numbers in the form. " +
+                                    "Starting Value and End Value are decimals representing the value of the item in dollars " +
                                     "and Lifetime is an integer representing the item's lifetime in years";
                 errorTextBox.Visible = true;
             }
+            catch (OverflowException exp)
+            {
+                //set error and make textbox visible.
+                errorTextBox.Text = "Error: One of your numerical entries is too small/large and has overflowed.  Please check your entries";
+                errorTextBox.Visible = true;
+            }
+            catch (Exception exp)
+            { 
+                //Console.WriteLine("There was an error!");
+                errorTextBox.Text="Error! " + exp.Message + "\nException type:" + exp.GetType();
+            }
+        
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -92,9 +104,7 @@ namespace Program4Depreciation
             else
             {
                 straightRadioButton.Checked = true; 
-            }
-
-         
+            }      
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
@@ -107,9 +117,7 @@ namespace Program4Depreciation
             }
              //output our total value 
             summaryTextBox.Text = String.Format("The total value of your inventory is {0:C2}.",
-                         totalValue);
-            
-            
+                         totalValue); 
         }
 
         private void CleanUp()

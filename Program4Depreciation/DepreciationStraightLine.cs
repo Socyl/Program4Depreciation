@@ -13,7 +13,7 @@ namespace Program4Depreciation
         private DateTime dateRemovedFromInventory;
         private decimal endValue;
         private decimal startValue;
-        private int lifetime;
+        private int lifetime= -1;
 
         public DateTime DateAddedToInventory
         {
@@ -57,7 +57,7 @@ namespace Program4Depreciation
         public decimal SalvageValue
         {
             get;
-            private set;
+            protected set;
         }
 
         public string Title
@@ -81,8 +81,8 @@ namespace Program4Depreciation
 
         public override string ToString()
         {
-            return "Title: " + Title + " Start Value: " + StartValue + " End Value: " +
-                    EndValue + " Lifetime: " + LifeTime;
+            return "Title: " + Title + " Start Value($): " + StartValue + " End Value($): " +
+                    EndValue + " Lifetime(Years): " + LifeTime;
         }
 
         public DateTime DateRemovedFromInventory
@@ -99,7 +99,6 @@ namespace Program4Depreciation
 
         public virtual void Calc() 
         {
-
 
             TimeSpan lifeTimeInYears;
             TimeSpan timeInInventory;
@@ -122,7 +121,7 @@ namespace Program4Depreciation
             depreciationPerYear = depreciableAssetCost * depRate;
 
             //time in inventory
-            if (DateRemovedFromInventory < DateTime.Today)
+            if (DateRemovedFromInventory < DateTime.Now)
             {
                 timeInInventory = DateRemovedFromInventory - DateAddedToInventory;
             }
@@ -134,7 +133,6 @@ namespace Program4Depreciation
             yearsInInventory = Convert.ToDecimal(timeInInventory.TotalDays) / 365.0M;
 
             SalvageValue = StartValue - (yearsInInventory * depreciationPerYear);
-
         }
 
     }      

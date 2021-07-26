@@ -13,11 +13,11 @@ namespace Program4Depreciation
 
         public override void Calc()
         {
-
+            int yearsInInventoryInt;
             decimal assetBookValue;
             decimal doubleSlRate;
-            decimal depreciationPerYear;
-            decimal eoyBookValue;
+            decimal depreciationForYear;
+            decimal yearsInInventory; 
             TimeSpan lifeTimeInYears;
             TimeSpan timeInInventory;
                 
@@ -25,32 +25,36 @@ namespace Program4Depreciation
             assetBookValue = StartValue;
             //set double SL rate
             doubleSlRate = 2.0M / Convert.ToDecimal(LifeTime);
-            //calculate yearly depreciation
-            depreciationPerYear = assetBookValue - doubleSlRate * assetBookValue;
 
             //convert LifeTime to a TimeSpan
             lifeTimeInYears = new TimeSpan((LifeTime * 365), 0, 0, 0);
+
             DateRemovedFromInventory = DateAddedToInventory + lifeTimeInYears;
 
-            //at this point, see how long item in inventory
-            //if finished depreciating, end value
-            //if not finished, am i depreciating continuously?  if so, how.
-            //if not,  annual calc and stop on whole years?
+            //time in inventory
+            //if fully depreciated
+            if (DateRemovedFromInventory < DateTime.Now)
+            {
+                //timeInInventory = DateRemovedFromInventory - DateAddedToInventory;
+                SalvageValue = EndValue; 
+            }
+            else  //if partially depreciated
+            {
+                timeInInventory = DateTime.Now - DateAddedToInventory;
 
+                yearsInInventory = Convert.ToDecimal(timeInInventory.TotalDays) / 365.0M;
+                yearsInInventoryInt = (int)yearsInInventory;  //convert to int for loop
 
-            ////time in inventory
-            //if (DateRemovedFromInventory < DateTime.Today)
-            //{
-            //    timeInInventory = DateRemovedFromInventory - DateAddedToInventory;
-            //}
-            //else
-            //{
-            //    timeInInventory = DateTime.Now - DateAddedToInventory;
-            //}
+                for (int i = 0; i < yearsInInventoryInt; i++)
+                {
+                    //calculate yearly depreciation
+                    depreciationForYear = doubleSlRate * assetBookValue;
+                    //subtract it from starting asset value
+                    assetBookValue -= depreciationForYear;
+                }
+                SalvageValue = assetBookValue;
+            }
 
-            //yearsInInventory = Convert.ToDecimal(timeInInventory.TotalDays) / 365.0M;
-
-            //SalvageValue = StartValue - (yearsInInventory * depreciationPerYear);
         }
 
         public override string ToString()
