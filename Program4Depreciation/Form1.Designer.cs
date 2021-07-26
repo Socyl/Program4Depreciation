@@ -79,7 +79,7 @@ namespace Program4Depreciation
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 428);
+            this.tabPage1.Size = new System.Drawing.Size(809, 428);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "How to use this application";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@ namespace Program4Depreciation
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(496, 238);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "Welcome to the Super Depreication Calculator (BC version). Enter your inventory i" +
+            this.textBox1.Text = "Welcome to the Super Depreciation Calculator (BC version). Enter your inventory i" +
     "n the inventory tab.  Go to the summary tab to find the value of your inventory." +
     "";
             // 
@@ -300,7 +300,7 @@ namespace Program4Depreciation
             this.tabPage3.Controls.Add(this.calculateButton);
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(792, 428);
+            this.tabPage3.Size = new System.Drawing.Size(809, 428);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Summary";
             this.tabPage3.UseVisualStyleBackColor = true;

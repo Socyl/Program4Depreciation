@@ -134,6 +134,9 @@ namespace Program4Depreciation
             dateInDateTimePicker.Value = DateTime.Now;
             dateOutDateTimePicker.Value = DateTime.Now;
 
+            //clear the summary text box
+            summaryTextBox.Text = "";
+
         }
     }
 }

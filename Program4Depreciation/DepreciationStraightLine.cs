@@ -123,16 +123,15 @@ namespace Program4Depreciation
             //time in inventory
             if (DateRemovedFromInventory < DateTime.Now)
             {
-                timeInInventory = DateRemovedFromInventory - DateAddedToInventory;
+                SalvageValue = EndValue;  //fully depreciated, no need for math
             }
             else
             {
                 timeInInventory = DateTime.Now - DateAddedToInventory;
+                yearsInInventory = Convert.ToDecimal(timeInInventory.TotalDays) / 365.0M;
+                SalvageValue = StartValue - (yearsInInventory * depreciationPerYear);
             }
 
-            yearsInInventory = Convert.ToDecimal(timeInInventory.TotalDays) / 365.0M;
-
-            SalvageValue = StartValue - (yearsInInventory * depreciationPerYear);
         }
 
     }      

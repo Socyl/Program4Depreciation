@@ -35,7 +35,7 @@ namespace Program4Depreciation
             //if fully depreciated
             if (DateRemovedFromInventory < DateTime.Now)
             {
-                //timeInInventory = DateRemovedFromInventory - DateAddedToInventory;
+                //no math if fully depreciated
                 SalvageValue = EndValue; 
             }
             else  //if partially depreciated
